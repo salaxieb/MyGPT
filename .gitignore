@@ -1,0 +1,16 @@
+# env
+.venv
+
+# corpus
+**/*.txt
+!requirements.txt
+**/*.mbox
+
+# models
+**/*.json
+
+# cache
+**/__pycache__
+
+# model
+trained_model/*
