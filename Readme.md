@@ -16,6 +16,7 @@ tbd
 
 ## Train yourself:
 ```
+make setup
 make dataset
 make tokenizer
 make train_stage1
@@ -24,4 +25,5 @@ make train_stage2
 
 todo:
 infer
+perplexity
 upload/download to hf

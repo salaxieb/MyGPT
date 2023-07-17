@@ -18,13 +18,8 @@ def make_training_dataset(dataset_path: Path, tokenizer: PreTrainedTokenizerFast
                 data.extend(examples)
         return data
 
-
-    train_data = load_data(
-        [str(path) for path in dataset_path.glob("*.txt")][:-1]
-    )
-    validation_data = load_data(
-        [str(path) for path in dataset_path.glob("*.txt")][-1:]
-    )
+    train_data = load_data([str(path) for path in dataset_path.glob("*.txt")][:-1])
+    validation_data = load_data([str(path) for path in dataset_path.glob("*.txt")][-1:])
 
     raw_datasets = DatasetDict(
         {
@@ -48,14 +43,13 @@ def make_training_dataset(dataset_path: Path, tokenizer: PreTrainedTokenizerFast
         # Split by chunks of max_len.
         result = {
             k: [
-                t[i:i + config.block_size]
+                t[i : i + config.block_size]
                 for i in range(0, total_length, config.block_size)
             ]
             for k, t in concatenated_examples.items()
         }
         result["labels"] = result["input_ids"].copy()
         return result
-
 
     lm_datasets = tokenized_datasets.map(
         group_texts,

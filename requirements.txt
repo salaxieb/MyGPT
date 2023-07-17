@@ -1,6 +1,7 @@
-transformers
+transformers[torch]
 datasets
 tokenizers
 tqdm
 typer
 # torch
+# deepspeed

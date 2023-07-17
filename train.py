@@ -5,7 +5,7 @@ from transformers import AutoModelForCausalLM, GPT2Config
 from safetensors.torch import save_model
 from transformers import Trainer
 from transformers import TrainingArguments
-from safetensors.torch import save_model
+from safetensors.torch import save_model, load_model
 
 from train_dataset import make_training_dataset
 from config import config
@@ -15,9 +15,7 @@ app = typer.Typer()
 
 
 def load_tokenizer(path: Path = Path("tokenizer") / "gpt-code.json"):
-    tokenizer = PreTrainedTokenizerFast(
-        tokenizer_file=str(path)
-    )
+    tokenizer = PreTrainedTokenizerFast(tokenizer_file=str(path))
     tokenizer.add_special_tokens(config.special_tokens)
     return tokenizer
 
@@ -39,13 +37,15 @@ def init_or_load_model(tokenizer: PreTrainedTokenizerFast, save_path: Path):
     return model
 
 
-
 @app.command()
 def train(dataset: str, continue_from_checkpoint: bool = False):
-    assert dataset in [config.github_ds_folder, config.stackoverflow_ds_folder], 'unknown dataset'
+    assert dataset in [
+        config.github_ds_folder,
+        config.stackoverflow_ds_folder,
+    ], "unknown dataset"
     tokenizer = load_tokenizer()
     lm_datasets = make_training_dataset(Path(dataset), tokenizer)
-    save_path: Path = Path("trained_model") / 'codebase_GPT.safetensors'
+    save_path: Path = Path("trained_model") / "codebase_GPT.safetensors"
     model = init_or_load_model(tokenizer, save_path)
 
     checkpoints_path = Path("trained_model").resolve()

@@ -38,7 +38,6 @@ for i, element in enumerate(ds, 1):
     # string = string.replace('\n', '\\n')
     string = string.encode("utf-8")
     f.write(string)
-    f.write('\n'.encode("utf-8"))
 
     if i % 1000 == 0:
         f.close()
