@@ -1,5 +1,5 @@
 setup:
-	pip install -r requiremetns.txt
+	pip install -r requirements.txt
 	DS_BUILD_OPS=1 pip install deepspeed
 	ds_report
 

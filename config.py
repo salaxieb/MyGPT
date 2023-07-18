@@ -6,11 +6,11 @@ from typing import Dict
 class Config:
     vocab_size: int = 10256
     block_size: int = 256  # context size
-    n_embd: int = 64
-    n_head: int = 4
-    n_layer: int = 2
-    per_device_train_batch_size: int = 2
-    per_device_eval_batch_size: int = 2
+    n_embd: int = 768
+    n_head: int = 12
+    n_layer: int = 12
+    per_device_train_batch_size: int = 1024
+    per_device_eval_batch_size: int = 1024
     github_num_train_epochs: float = 0.1
     stackoverflow_num_train_epochs: float = 0.1
     stage1_save_steps: int = 5000

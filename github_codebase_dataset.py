@@ -1,5 +1,6 @@
 from datasets import load_dataset
 from pathlib import Path
+from tqdm import tqdm
 
 from config import config
 
@@ -26,7 +27,7 @@ output_folder.mkdir(exist_ok=True)
 part = 0
 output_file = output_folder / f"gihub_cb_part_{part}.txt"
 f = output_file.open("wb")
-for i, element in enumerate(ds, 1):
+for i, element in enumerate(tqdm(ds), 1):
     string = (
         f'repo_name: {element["repo_name"]}\n'
         f'path: {element["path"]}\n'
